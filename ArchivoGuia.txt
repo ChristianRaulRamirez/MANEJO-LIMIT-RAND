@@ -1,0 +1,108 @@
+select * from libros limit 0,4;
+Muestra los primeros 4 registros, 0,1,2 y 3 .
+
+
+select * from libros limit 5,4;
+recuperamos 4 registros, desde el 5 al 8.
+
+Si se coloca un solo argumento, indica el máximo número de registros a retornar, comenzando desde 0. Ejemplo:
+select * from libros limit 8;
+
+
+Para recuperar los registros desde cierto número hasta el final, se puede colocar un número grande para el segundo argumento:
+select * from libros limit 6,10000;
+
+
+Para recuperar de una tabla registros aleatorios se puede utilizar la función "rand()" combinada con "order by" y "limit":
+ select * from libros
+  order by rand()
+  limit 5;
+
+
+
+
+Problema 1 : 
+-----------
+Un comercio que vende artículos de computación registra los datos de sus artículos en una tabla con 
+ese nombre.
+
+1- Elimine "articulos", si existe:
+ drop table if exists articulos;
+
+2- Cree la tabla, con la siguiente estructura:
+create table articulos(
+  codigo int unsigned auto_increment,
+  nombre varchar(25) not null,
+  descripcion varchar(30),
+  precio decimal(6,2) unsigned,
+  cantidad tinyint unsigned,
+  primary key(codigo)
+ );
+
+3- Ingrese algunos registros:
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('impresora','Epson Stylus C45',400.80,20);
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('impresora','Epson Stylus C85',500,30);
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('monitor','Samsung 14',800,10);
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('teclado','ingles Biswal',100,50);
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('teclado','español Biswal',90,50);
+ insert into articulos (nombre, descripcion, precio,cantidad)
+  values ('impresora multifuncion','HP 1410',300,20);
+
+4- El comercio quiere tomar 2 artículos al azar para ofrecer una oferta especial haciendo un 
+descuento. Seleccione 2 registros al azar de la tabla "articulos":
+ select * from articulos
+  order by rand()
+  limit 2;
+
+
+-------------------------------------------------------------------------------------------------------------------------
+Problema 2: 
+Trabajamos con la tabla "alumnos" en el cual un instituto de enseñanza guarda los datos de sus 
+alumnos.
+Eliminamos la tabla "alumnos" si existe:
+ drop table if exists alumnos;
+Creamos la tabla:
+ create table alumnos(
+  documento char(8) not null,
+  nombre varchar(30),
+  domicilio varchar(30),
+  ciudad varchar(20),
+  provincia varchar(20),
+  primary key(documento)
+ );
+
+Agregamos varios registros:
+ insert into alumnos values('22333444','Juan Perez','Colon 123','Cordoba','Cordoba');
+ insert into alumnos values('23456789','Ana Acosta','Caseros 456','Cordoba','Cordoba');
+ insert into alumnos values('24123123','Patricia Morales','Sucre 234','Villa del Rosario','Cordoba');
+ insert into alumnos values('25000333','Jose Torres','Sarmiento 980','Carlos Paz','Cordoba');
+ insert into alumnos values('26333444','Susana Molina','Avellaneda 234','Rosario','Santa Fe');
+ insert into alumnos values('27987654','Marta Herrero','San Martin 356','Villa del 
+Rosario','Cordoba');
+ insert into alumnos values('28321321','Marcos Ferreyra','Urquiza 357','Cordoba','Cordoba');
+ insert into alumnos values('30987464','Marta Perez','Rivadavia 234','Cordoba','Cordoba');
+
+El instituto quiere tomar 3 alumnos al azar para que representen al instituto en una feria de 
+ciencias. Para recuperar de una tabla registros aleatorios se puede utilizar la función "rand()" 
+combinada con "order by" y "limit":
+ select documento,nombre
+  from alumnos
+  order by rand()
+  limit 3;
+
+Nos devuelve los nombres y documentos de 3 alumnos tomados al azar de la tabla "alumnos". Podemos 
+ejecutar la sentencia anterior varias veces seguidas y veremos que los registros recuperados son 
+diferentes en cada ocasión:
+ select documento,nombre from alumnos order by rand() limit 3;
+ select documento,nombre from alumnos order by rand() limit 3;
+ select documento,nombre from alumnos order by rand() limit 3;
+
+
+
+
+
